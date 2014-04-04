@@ -23,6 +23,13 @@ module ActsAsVotable
     validates_presence_of :votable_id
     validates_presence_of :voter_id
 
+    def votable_type=(klass)
+      super(klass.to_s.classify.constantize.base_class.to_s)
+    end
+
+    def voter_type=(klass)
+      super(klass.to_s.classify.constantize.base_class.to_s)
+    end
   end
 
 end

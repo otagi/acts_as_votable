@@ -79,7 +79,7 @@ module ActsAsVotable
       _votes_ = find_votes_for({
         :voter_id => options[:voter].id,
         :vote_scope => options[:vote_scope],
-        :voter_type => options[:voter].class.name
+        :voter_type => options[:voter].class.base_class.name
       })
 
       if _votes_.count == 0 or options[:duplicate]
@@ -271,7 +271,7 @@ module ActsAsVotable
 
     # voters
     def voted_on_by? voter
-      votes = find_votes_for :voter_id => voter.id, :voter_type => voter.class.name
+      votes = find_votes_for :voter_id => voter.id, :voter_type => voter.class.base_class.name
       votes.count > 0
     end
 
